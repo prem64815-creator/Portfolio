@@ -1,0 +1,55 @@
+.projects-section { padding: clamp(var(--space-16),8vw,var(--space-32)) 0; position: relative; z-index: 1; }
+.projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6); margin-bottom: var(--space-10); }
+
+.project-card { perspective: 1200px; min-height: 480px; }
+.card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.project-card.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  padding: var(--space-6);
+  display: flex; flex-direction: column;
+  border-color: color-mix(in oklab, var(--pc, #7c3aed) 30%, rgba(255,255,255,0.1));
+}
+.card-back { transform: rotateY(180deg); }
+
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4); }
+.project-icon-wrap {
+  width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+  background: color-mix(in oklab, var(--pc,#7c3aed) 18%, transparent);
+  border-radius: var(--radius-lg); color: var(--pc,var(--color-primary-light));
+}
+.project-status { font-size: 10px; }
+.project-category { font-size: var(--text-xs); color: var(--pc,var(--color-primary-light)); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-2); }
+.project-title { font-size: var(--text-lg); font-weight: 800; color: var(--color-text); margin-bottom: var(--space-1); line-height: 1.2; }
+.project-subtitle { font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4); }
+.project-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65; flex: 1; margin-bottom: var(--space-4); max-width: none; }
+.project-tech { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4); }
+.tech-tag {
+  padding: 2px var(--space-2);
+  background: color-mix(in oklab, var(--pc,#7c3aed) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--pc,#7c3aed) 30%, transparent);
+  border-radius: var(--radius-full); font-size: 10px; font-weight: 500;
+  color: color-mix(in oklab, var(--pc,#a78bfa) 80%, white);
+}
+.project-actions { display: flex; gap: var(--space-3); }
+.proj-btn { padding: var(--space-2) var(--space-4) !important; font-size: var(--text-xs) !important; }
+
+.back-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4); }
+.back-close { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: rgba(255,255,255,0.06); color: var(--color-text-muted); font-size: 12px; flex-shrink: 0; transition: background var(--transition-fast), color var(--transition-fast); }
+.back-close:hover { background: rgba(255,255,255,0.12); color: var(--color-text); }
+.back-label { font-size: var(--text-xs); font-weight: 700; color: var(--pc,var(--color-primary-light)); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-3); }
+.highlights-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
+.highlight-item { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.5; max-width: none; }
+.highlight-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pc,var(--color-primary-light)); flex-shrink: 0; margin-top: 6px; }
+
+.projects-cta { display: flex; align-items: center; justify-content: center; gap: var(--space-4); padding-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
+
+.projects-section .fade-up { opacity:0; transform:translateY(30px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.projects-section.visible .fade-up { opacity:1; transform:translateY(0); }
+.projects-section.visible .project-card { animation: cardReveal 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes cardReveal { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+@media (max-width: 1024px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } .project-card { min-height: 420px; } }
